@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أنا حاضر</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; direction: rtl; background-color: #f8f9fa; }
+        #preview img { margin-top: 20px; width: 100%; max-width: 400px; border-radius: 10px; }
+        input, button { padding: 10px; margin: 10px; font-size: 18px; }
+        button { background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <h2>اكتب اسمك لتحصل على صورة المشاركة</h2>
+    <input type="text" id="nameInput" placeholder="اكتب اسمك هنا">
+    <button onclick="generateImage()">إنشاء الصورة</button>
+    <br><br>
+    <canvas id="canvas" width="600" height="400" style="display:none;"></canvas>
+    <div id="preview"></div>
+
+    <script>
+        function generateImage() {
+            const name = document.getElementById('nameInput').value.trim();
+            if (!name) { alert("يرجى إدخال الاسم!"); return; }
+
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // خلفية للصورة
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // رسم إطار بسيط
+            ctx.strokeStyle = "#007bff";
+            ctx.lineWidth = 5;
+            ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
+
+            // إضافة عبارة "أنا حاضر"
+            ctx.fillStyle = "#000";
+            ctx.font = "bold 40px Arial";
+            ctx.fillText("أنا حاضر", 220, 150);
+
+            // إضافة اسم المستخدم
+            ctx.font = "30px Arial";
+            ctx.fillStyle = "#007bff";
+            ctx.fillText(name, 250, 220);
+
+            // تحويل إلى صورة
+            const img = new Image();
+            img.src = canvas.toDataURL();
+            img.onload = function() {
+                document.getElementById('preview').innerHTML = "";
+                document.getElementById('preview').appendChild(img);
+
+                // زر تحميل الصورة
+                const downloadLink = document.createElement("a");
+                downloadLink.href = img.src;
+                downloadLink.download = "أنا_حاضر.png";
+                downloadLink.innerText = "تحميل الصورة";
+                downloadLink.style.display = "block";
+                downloadLink.style.marginTop = "10px";
+                document.getElementById('preview').appendChild(downloadLink);
+            };
+        }
+    </script>
+</body>
+</html>
