@@ -36,6 +36,10 @@
         button:hover { 
             background-color: #0056b3; 
         }
+        .photo {
+            flex: 1;
+            background: url("IMG_3465") no-repeat center center;
+        }
     </style>
 </head>
 <body>
@@ -43,9 +47,10 @@
     <input type="text" id="nameInput" placeholder="اكتب اسمك هنا">
     <button onclick="generateImage()">إنشاء الصورة</button>
     <br><br>
+    <div class="photo">
     <canvas id="canvas" width="600" height="400" style="display:none;"></canvas>
     <div id="preview"></div>
-
+    </div>
     <script>
         function generateImage() {
             const name = document.getElementById('nameInput').value.trim();
