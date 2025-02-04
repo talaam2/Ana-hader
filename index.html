@@ -39,6 +39,8 @@
         }
         .photo {
             background: url("IMG_3465.png") cover center center;
+            flex: 1;
+            
         }
     </style>
 </head>
@@ -49,7 +51,7 @@
     <br><br>
     <div class="photo">
     <canvas id="canvas" width="600" height="400" style="display:none;"></canvas>
-    <div id="preview"><img src="IMG_3465.png"></div>
+    <div id="preview"></div>
     </div>
     <script>
         function generateImage() {
